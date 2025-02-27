@@ -20,7 +20,7 @@ if [ "$isVimRcAdapted" -eq 0 ]; then
     if [ -z "$VIMRUNTIME_FOLDER" ]; then
         echo "VIMRUNTIME: $VIMRUNTIME" | tee -a "$LOG_FILE"
         echo "VIMRUNTIME_FOLDER: $VIMRUNTIME_FOLDER" | tee -a "$LOG_FILE"
-        VIMRUNTIME_FOLDER="/usr/share/vim/"  # Set default path
+	VIMRUNTIME_FOLDER=$(find /usr/share -type f -name "defaults.vim")  # Set default path
         echo "VIMRUNTIME_FOLDER was empty. Using default: $VIMRUNTIME_FOLDER" | tee -a "$LOG_FILE"
     else
         echo "VIMRUNTIME: $VIMRUNTIME" | tee -a "$LOG_FILE"
@@ -36,7 +36,7 @@ if [ "$isVimRcAdapted" -eq 0 ]; then
 " wish at the end of this file.
 
 " Load the defaults
-source $VIMRUNTIME_FOLDER/defaults.vim
+source $VIMRUNTIME_FOLDER
 
 " Prevent the defaults from being loaded again later, if the user doesn't
 " have a local vimrc (~/.vimrc)
