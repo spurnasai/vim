@@ -13,19 +13,19 @@ isVimRcAdapted=$(grep "FreePBX 17 changes" /etc/vim/vimrc.local | wc -l)
 
 if [ "$isVimRcAdapted" -eq 0 ]; then
     # Get the VIMRUNTIME path
-    VIMRUNTIME=$(/usr/bin/vim -e -T dumb --cmd 'exe "set t_cm=\<C-M>"|echo $VIMRUNTIME|quit' | tr -d '\015')
-    VIMRUNTIME_FOLDER=$(echo "$VIMRUNTIME" | sed 's/ //g')
+#    VIMRUNTIME=$(/usr/bin/vim -e -T dumb --cmd 'exe "set t_cm=\<C-M>"|echo $VIMRUNTIME|quit' | tr -d '\015')
+#    VIMRUNTIME_FOLDER=$(echo "$VIMRUNTIME" | sed 's/ //g')
 
     # Check if VIMRUNTIME_FOLDER is empty and set a default if necessary
-    if [ -z "$VIMRUNTIME_FOLDER" ]; then
-        echo "VIMRUNTIME: $VIMRUNTIME" | tee -a "$LOG_FILE"
-        echo "VIMRUNTIME_FOLDER: $VIMRUNTIME_FOLDER" | tee -a "$LOG_FILE"
-	VIMRUNTIME_FOLDER=$(find /usr/share -type f -name "defaults.vim")  # Set default path
-        echo "VIMRUNTIME_FOLDER was empty. Using default: $VIMRUNTIME_FOLDER" | tee -a "$LOG_FILE"
-    else
-        echo "VIMRUNTIME: $VIMRUNTIME" | tee -a "$LOG_FILE"
-        echo "VIMRUNTIME_FOLDER: $VIMRUNTIME_FOLDER" | tee -a "$LOG_FILE"
-    fi
+#    if [ -z "$VIMRUNTIME_FOLDER" ]; then
+#        echo "VIMRUNTIME: $VIMRUNTIME" | tee -a "$LOG_FILE"
+#        echo "VIMRUNTIME_FOLDER: $VIMRUNTIME_FOLDER" | tee -a "$LOG_FILE"
+#	VIMRUNTIME_FOLDER=$(find /usr/share -type f -name "defaults.vim")  # Set default path
+#        echo "VIMRUNTIME_FOLDER was empty. Using default: $VIMRUNTIME_FOLDER" | tee -a "$LOG_FILE"
+#    else
+#        echo "VIMRUNTIME: $VIMRUNTIME" | tee -a "$LOG_FILE"
+#       echo "VIMRUNTIME_FOLDER: $VIMRUNTIME_FOLDER" | tee -a "$LOG_FILE"
+#    fi
 
     # Append FreePBX 17 changes to vimrc.local
     cat <<EOF >> /etc/vim/vimrc.local
@@ -36,7 +36,7 @@ if [ "$isVimRcAdapted" -eq 0 ]; then
 " wish at the end of this file.
 
 " Load the defaults
-source $VIMRUNTIME_FOLDER
+source '$VIMRUNTIME/defaults.vim'
 
 " Prevent the defaults from being loaded again later, if the user doesn't
 " have a local vimrc (~/.vimrc)
