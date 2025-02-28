@@ -36,7 +36,7 @@ if [ "$isVimRcAdapted" -eq 0 ]; then
 " wish at the end of this file.
 
 " Load the defaults
-source '$VIMRUNTIME/defaults.vim'
+source \$VIMRUNTIME/defaults.vim
 
 " Prevent the defaults from being loaded again later, if the user doesn't
 " have a local vimrc (~/.vimrc)
